@@ -1,0 +1,30 @@
+:root {
+  /* blue */
+  --blue-500: #4880ee;
+  --blue-600: #3a6fd4;
+
+  /* orange */
+  --orange-500: #e84118;
+
+  /* cool gray (blue-tinted) */
+  --cool-gray-50: #f2f4f6;
+  --cool-gray-500: #dadada;
+
+  /* gray */
+  --gray-900: #222222;
+}
+
+@theme inline {
+  /* blue */
+  --color-blue-500: var(--blue-500);
+
+  /* orange */
+  --color-orange-500: var(--orange-500);
+
+  /* cool gray */
+  --color-cool-gray-50: var(--cool-gray-50);
+  --color-cool-gray-500: var(--cool-gray-500);
+
+  /* gray */
+  --color-gray-900: var(--gray-900);
+}
