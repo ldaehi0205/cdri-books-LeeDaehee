@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import { BookItem, BookDetail } from '@/entities/book';
 import { useBookmark } from '@/features/bookmark';
@@ -11,7 +11,7 @@ const Page = () => {
   const [everOpened, setEverOpened] = useState<Set<string>>(new Set());
   const { savedBooks, handleBookmark } = useBookmark();
 
-  const allBooks = [...savedBooks.values()];
+  const allBooks = useMemo(() => [...savedBooks.values()], [savedBooks]);
 
   const handleOpenBookItem = (isbn: string | null) => {
     if (isbn) setEverOpened(prev => new Set(prev).add(isbn));
