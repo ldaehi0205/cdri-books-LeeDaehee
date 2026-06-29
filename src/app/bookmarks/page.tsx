@@ -1,10 +1,10 @@
 'use client';
 
-import useBookmark from '@/hooks/useBookmark';
-import BookDetail from '../../components/Book/BookDetail';
-import BookItem from '../../components/Book/BookItem';
 import Image from 'next/image';
 import React, { useState } from 'react';
+
+import { BookItem, BookDetail } from '@/entities/book';
+import { useBookmark } from '@/features/bookmark';
 
 const Page = () => {
   const [openIsbn, setOpenIsbn] = useState<string | null>(null);

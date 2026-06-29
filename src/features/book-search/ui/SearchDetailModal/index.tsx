@@ -1,9 +1,12 @@
 'use client';
 
-import { BUTTON } from '@/components/Button/constants';
-import Button from '@/components/Button/index';
-import { BOOK_SELECT_OPTIONS, SEARCH_TYPES } from '@/constants/book';
-import { cn } from '@/utils/style';
+import { BUTTON } from '@/shared/ui/Button/constants';
+import Button from '@/shared/ui/Button/index';
+import {
+  BOOK_SELECT_OPTIONS,
+  SEARCH_TYPES,
+} from '@/features/book-search/model/constants';
+import { cn } from '@/shared/lib/cn';
 import { useRef, useState, useEffect } from 'react';
 
 interface SearchDetailModalProps {
@@ -16,6 +19,7 @@ const SearchDetailModal = ({ onClose, onSearch }: SearchDetailModalProps) => {
     BOOK_SELECT_OPTIONS.title,
   );
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -27,10 +31,13 @@ const SearchDetailModal = ({ onClose, onSearch }: SearchDetailModalProps) => {
       ) {
         setDropdownOpen(false);
       }
+      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+        onClose();
+      }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [onClose]);
 
   const handleSearch = () => {
     onSearch(selectedType, inputRef.current?.value ?? '');
@@ -38,7 +45,10 @@ const SearchDetailModal = ({ onClose, onSearch }: SearchDetailModalProps) => {
   };
 
   return (
-    <div className="absolute top-full right-0 mt-2 w-[360px] bg-white rounded-lg translate-x-[40%] translate-y-0 shadow-[0_4px_20px_rgba(0,0,0,0.15)] border border-[#E5E8EC] z-50">
+    <div
+      ref={modalRef}
+      className="absolute top-full right-0 mt-2 w-[360px] bg-white rounded-lg translate-x-[40%] translate-y-0 shadow-[0_4px_20px_rgba(0,0,0,0.15)] border border-[#E5E8EC] z-50"
+    >
       <div className="relative flex flex-col gap-[10px] px-4 pt-4 pb-3">
         <div className="flex justify-end w-[100%]">
           <button

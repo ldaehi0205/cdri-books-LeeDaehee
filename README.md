@@ -1,7 +1,8 @@
 ## 개요
 
 cdri 기술 과제 제출을 위한 프로젝트입니다.
-도서 검색 및 북마크 기능을 구현했으며, 공통 컴포넌트와 모듈화를 통해 재사용성을 높였으며, 성능 최적화를 고려한 구조로 개발했습니다.
+도서 검색 및 북마크 기능을 구현했으며, 성능 최적화를 고려한 구조로 개발했습니다.
+공통 컴포넌트와 모듈화를 통해 재사용성을 높이고 FSD 아키텍처를 적용하여 각 레이어별 책임을 분리하였습니다.
 
 ## 강조 기능 및 주요 코드
 
@@ -129,20 +130,21 @@ export const fetchBooks = async (
 ## 프로젝트 구조
 
 ```
-src/
-├── app/																# 페이지 단위 폴더
-│   ├── books/
-│   ├── bookmarks/
-├── components/													# 재사용 가능한 컴포넌트 폴더
-│   ├── Book/
-│   ├── Button/
-│   ├── Header/
-│   ├── Searchbar/
-├── hooks/															# 재사용 가능한 기능별 커스텀 훅
-├── service/														# API 호출 모듈
-├── constants/													# 공통 상수
-├── utils/															# 공통 함수
-└── type/
+└── src/
+    ├── app/                             # 페이지 단위 폴더
+    │   ├── bookmarks/
+    │   ├── books/
+    ├── features/                        # 기능별(찜하기, 도서 검색) 슬라이스
+    │   ├── book-search/
+    │   └── bookmark/
+    ├── entities/                        # 도메인 데이터 중심의 독립적인 UI, 데이터 모델
+    │   └── book/
+    └── shared/                          # 재사용 가능한 공통 유틸, 공통 UI 컴포넌트
+        ├── api/
+        ├── config/
+        ├── lib/
+        ├── styles/color.css
+        └── ui/
 ```
 
 ## 개발 환경

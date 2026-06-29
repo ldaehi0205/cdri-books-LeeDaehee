@@ -2,9 +2,9 @@
 
 import {
   getRecentSearches,
-  addLocalStorageSearchs,
+  addLocalStorageSearches,
   updateRecentSearches,
-} from '@/utils/saerch';
+} from '@/shared/lib/searchHistory';
 import Image from 'next/image';
 import { KeyboardEvent, MouseEvent, forwardRef, useState } from 'react';
 
@@ -12,7 +12,7 @@ interface Props {
   onSubmit: (keyword: string) => void;
 }
 
-const Searchbar = forwardRef<HTMLInputElement, Props>(({ onSubmit }, ref) => {
+const SearchBar = forwardRef<HTMLInputElement, Props>(({ onSubmit }, ref) => {
   const [showRecent, setShowRecent] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
@@ -54,7 +54,7 @@ const Searchbar = forwardRef<HTMLInputElement, Props>(({ onSubmit }, ref) => {
   const handleRemove = (keyword: string, e: MouseEvent) => {
     e.stopPropagation();
     const next = getRecentSearches().filter(s => s !== keyword);
-    addLocalStorageSearchs(next);
+    addLocalStorageSearches(next);
     setRecentSearches(next);
   };
 
@@ -107,5 +107,5 @@ const Searchbar = forwardRef<HTMLInputElement, Props>(({ onSubmit }, ref) => {
   );
 });
 
-Searchbar.displayName = 'Searchbar';
-export default Searchbar;
+SearchBar.displayName = 'SearchBar';
+export default SearchBar;

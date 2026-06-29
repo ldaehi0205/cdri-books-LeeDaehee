@@ -1,8 +1,8 @@
 'use client';
 
-import Button from '@/components/Button';
-import { BUTTON } from '@/components/Button/constants';
-import { cn } from '@/utils/style';
+import Button from '@/shared/ui/Button';
+import { BUTTON } from '@/shared/ui/Button/constants';
+import { cn } from '@/shared/lib/cn';
 import Image from 'next/image';
 
 const arrow = '/arrow.svg';

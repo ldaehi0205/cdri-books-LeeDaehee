@@ -1,6 +1,6 @@
 'use client';
 
-import { PATH } from '@/constants/path';
+import { PATH } from '@/shared/config/path';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 

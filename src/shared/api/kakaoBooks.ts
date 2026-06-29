@@ -6,6 +6,7 @@ interface BookSearchParams {
   query: string;
   size: number;
   page: number;
+  target?: TSelectOption;
 }
 
 export const fetchBooks = async (

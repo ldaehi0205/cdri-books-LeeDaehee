@@ -9,13 +9,13 @@ export const getRecentSearches = (): string[] => {
   }
 };
 
-export const addLocalStorageSearchs = (next: string[]) => {
+export const addLocalStorageSearches = (next: string[]) => {
   localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(next));
 };
 
 export const updateRecentSearches = (keyword: string): string[] => {
   const filtered = getRecentSearches().filter(s => s !== keyword);
   const next = [keyword, ...filtered].slice(0, MAX_RECENT_SEARCHES);
-  addLocalStorageSearchs(next);
+  addLocalStorageSearches(next);
   return next;
 };

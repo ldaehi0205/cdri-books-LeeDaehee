@@ -1,4 +1,4 @@
-import { addLocalStorageBookmark, getBookmark } from '@/utils/bookmark';
+import { addLocalStorageBookmark, getBookmark } from '@/entities/book';
 import { useEffect, useState } from 'react';
 
 const useBookmark = () => {

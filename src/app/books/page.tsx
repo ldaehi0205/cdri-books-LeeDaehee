@@ -3,16 +3,12 @@
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 
-import { BUTTON } from '@/components/Button/constants';
-import Button from '@/components/Button/index';
-import useBookmark from '@/hooks/useBookmark';
-import useBookSearchResults from '@/hooks/useBookSearchResults';
-import Searchbar from '@/components/Searchbar';
-import { QUERY_STATUS } from '@/constants/queryKey';
-
-import BookItem from '../../components/Book/BookItem';
-import BookDetail from '../../components/Book/BookDetail';
-import SearchDetailModal from './_components/SearchDetailModal';
+import { BUTTON } from '@/shared/ui/Button/constants';
+import Button from '@/shared/ui/Button/index';
+import { QUERY_STATUS } from '@/shared/config/queryKey';
+import { BookItem, BookDetail } from '@/entities/book';
+import { useBookmark } from '@/features/bookmark';
+import { useBookSearchResults, SearchBar, SearchDetailModal } from '@/features/book-search';
 
 const Page = () => {
   const [openIsbn, setOpenIsbn] = useState<string | null>(null);
@@ -50,7 +46,7 @@ const Page = () => {
       <div className="flex flex-col gap-4">
         <p className="text-[22px] font-bold">도서 검색</p>
         <div className="flex items-center gap-4">
-          <Searchbar
+          <SearchBar
             ref={inputRef}
             onSubmit={keyword => {
               setOpenIsbn(null);
@@ -87,13 +83,11 @@ const Page = () => {
         <span className="text-blue-500">{totalCount}</span>
         <span>건</span>
       </div>
-      {/* 로딩 케이스 */}
       {isLoading && (
         <div className="flex justify-center items-center mt-[100px]">
           <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
         </div>
       )}
-      {/* 도서 없는 케이스 */}
       {isEmpty && (
         <div className="flex flex-col justify-center items-center h-full gap-5 font-medium text-[#6D7582] mt-[100px]">
           <Image
@@ -106,13 +100,11 @@ const Page = () => {
           <p>검색된 결과가 없습니다.</p>
         </div>
       )}
-      {/* 에러 케이스 */}
       {isError && (
         <div className="flex justify-center items-center mt-[100px] text-[#6D7582]">
           <p>오류가 발생했습니다. 다시 시도해 주세요.</p>
         </div>
       )}
-      {/* 도서 목록 출력될 경우 */}
       {!isLoading && !isEmpty && !isError && (
         <ul
           className="relative"
@@ -157,7 +149,6 @@ const Page = () => {
         </ul>
       )}
       {isFetchingNextPage && <p className="text-center">불러오는 중...</p>}
-      {/* 에러시 재호출 cta */}
       {isFetchNextPageError && (
         <div className="flex flex-col items-center gap-3 py-4">
           <p className="text-[#6D7582]">목록을 불러오지 못했습니다.</p>
